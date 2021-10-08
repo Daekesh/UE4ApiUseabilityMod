@@ -1,0 +1,20 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 3,
+
+  "name": "Unreal Engine 4 Api Usability Mod",
+  "description": "This extension changes the header and source file locations in the references blocks on the api website to links to the files on github.",
+  "version": "1.2",
+
+  "content_scripts": [
+    {
+      "matches": ["https://docs.unrealengine.com/*"],
+      "js": ["myscript.js"]
+    }
+  ],
+  
+  "icons": { "16":  "icon16.png",
+             "48":  "icon48.png",
+             "128": "icon128.png" }
+}
