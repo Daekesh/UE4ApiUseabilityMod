@@ -1,3 +1,8 @@
+var s = document.createElement( 'script' );
+s.src = chrome.runtime.getURL( 'pagescript.js' );
+s.onload = function() { this.remove(); };
+( document.head || document.documentElement ).appendChild( s );
+
 function updateUrls( baseUrl )
 {
 	var referencesNode = document.getElementById( "references" );
@@ -20,7 +25,7 @@ function updateUrls( baseUrl )
 			
 			if ( valueCell == null || nameCell.firstElementChild == null )
 				continue;
-	
+
 			valueCell.firstElementChild.innerHTML = 
 				"<a href='"
 				+ baseUrl
@@ -28,6 +33,9 @@ function updateUrls( baseUrl )
 				+ "' target='_new'>" 
 				+ valueCell.firstElementChild.innerHTML 
 				+ "</a>";
+
+			if ( baseUrl.startsWith( 'file://' ) )
+				valueCell.firstElementChild.firstElementChild.setAttribute( 'onclick', "UEAUM_copyUrl( this ); return false;" );
 		}
 	}
 }
@@ -36,4 +44,4 @@ chrome.storage.sync.get({
 		baseUrl: 'https://github.com/EpicGames/UnrealEngine/blob/release'
 	}, function( items ) {
 		updateUrls( items.baseUrl );
-	});
+});
