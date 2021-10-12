@@ -4,7 +4,7 @@
   "manifest_version": 3,
 
   "name": "Unreal Engine 4 Api Usability Mod",
-  "description": "This extension changes the header and source file locations in the references blocks on the api website to links to the files on github.",
+  "description": "This changes the header and source file locations in the references blocks on the api website to links to the files on github.",
   "version": "1.2",
 
   "content_scripts": [
