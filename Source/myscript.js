@@ -40,8 +40,35 @@ function updateUrls( baseUrl )
 	}
 }
 
+function addHeaders()
+{
+	var maincol = document.getElementById('maincol');
+	var access = document.getElementById('access');
+
+	if ( maincol && access )
+	{
+		access.innerHTML = "<a name='top' />" + access.innerHTML;
+
+		var headers = maincol.getElementsByClassName('heading');
+
+		for ( var i = 0, length = headers.length; i < length; ++i)
+		{
+			var headerName = headers[i].children[0].innerHTML.trim();
+			
+			access.innerHTML += ( i == 0 ? "<br />" : ", " ) + "<a href='#" + headerName + "' style='color: #ffffff;'>" + headerName + "</a>";
+
+			headers[i].innerHTML = "<a name='" + headerName + "' />" + headers[i].innerHTML;
+			
+			var content = headers[i].nextElementSibling;
+			console.log( content );
+			content.innerHTML += "<a href='#top'>Back To Top</a>";
+		}
+	}
+}
+
 chrome.storage.sync.get({
 		baseUrl: 'https://github.com/EpicGames/UnrealEngine/blob/release'
 	}, function( items ) {
 		updateUrls( items.baseUrl );
+		addHeaders();
 });
